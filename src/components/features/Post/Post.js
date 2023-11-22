@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 const Post = (props) => {
   const postId = props.id;
   return (
-    <Card style={{ width: '32%' }}>
+    <Card className="mb-3">
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
-        <p>
+        <Card.Text>
           <strong>Author:</strong> {props.author}
-        </p>
-        <p>
+        </Card.Text>
+        <Card.Text>
           <strong>Published:</strong> {props.publishedDate}
-        </p>
-        <p>{props.shortDescription}</p>
+        </Card.Text>
+        <Card.Text>{props.shortDescription} </Card.Text>
         <Button variant="primary" as={Link} to={`/post/${postId}`}>
           Read more
         </Button>

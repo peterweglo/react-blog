@@ -7,11 +7,11 @@ const List = () => {
   const posts = useSelector(getAllPosts);
   return (
     <Row>
-      <Col className="d-flex justify-content-between">
-        {posts.map((post) => (
-          <Post key={post.id} {...post} />
-        ))}
-      </Col>
+      {posts.map((post) => (
+        <Col key={post.id} xs="12" md="6" lg="4">
+          <Post {...post} />
+        </Col>
+      ))}
     </Row>
   );
 };
