@@ -5,10 +5,11 @@ import { getAllPosts } from '../../../redux/postsRedux';
 
 const List = () => {
   const posts = useSelector(getAllPosts);
+
   return (
     <Row>
       {posts.map((post) => (
-        <Col key={post.id} xs="12" md="6" lg="4">
+        <Col key={post.id} xs='12' md='6' lg='4'>
           <Post {...post} />
         </Col>
       ))}
