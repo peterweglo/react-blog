@@ -1,9 +1,7 @@
+import EditPostForm from '../../features/EditPostForm/EditPostForm';
+
 const EditPost = () => {
-  return (
-    <div>
-      <h1>Edit post</h1>
-    </div>
-  );
+  return <EditPostForm />;
 };
 
 export default EditPost;
