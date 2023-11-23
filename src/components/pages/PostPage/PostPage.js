@@ -33,7 +33,7 @@ const PostPage = () => {
             <Card.Text>
               <strong>Published:</strong> {postData.publishedDate}
             </Card.Text>
-            <Card.Text>{postData.shortDescription} </Card.Text>
+            <Card.Text>{postData.content} </Card.Text>
           </Card.Body>
         </Card>
       </div>
