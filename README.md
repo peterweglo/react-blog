@@ -1,4 +1,4 @@
-# Link to project:
+# Link:
 
 https://react-blog.peterweglo.repl.co/
 
