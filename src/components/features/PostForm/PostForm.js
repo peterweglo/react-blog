@@ -20,38 +20,61 @@ const PostForm = ({ action, actionText, ...props }) => {
     props.shortDescription || ''
   );
   const [content, setContent] = useState(props.content || '');
+  const [contentError, setContentError] = useState(false);
+  const [dateError, setDateError] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    action({ title, author, publishedDate, shortDescription, content });
+  const handleSubmit = () => {
+    const contentWithoutHTML = content.replace('<p><br></p>', '');
+    const isContentEmpty = contentWithoutHTML.length === 0;
+
+    if (isContentEmpty) {
+      setContentError(true);
+    }
+
+    setDateError(!publishedDate);
+
+    if (!isContentEmpty && publishedDate)
+      action({ title, author, publishedDate, shortDescription, content });
   };
   return (
-    <Form onSubmit={handleSubmit} style={{ width: '70%', margin: '0 auto' }}>
+    <Form
+      onSubmit={validate(handleSubmit)}
+      style={{ width: '70%', margin: '0 auto' }}
+    >
       <h1>{actionText}</h1>
-      <Form.Group className="mb-3" controlId="formTitle">
+      <Form.Group className='mb-3' controlId='formTitle'>
         <Form.Label>Title</Form.Label>
         <Form.Control
+          {...register('title', { required: true, minLength: 3 })}
           style={{ width: '50%' }}
-          type="text"
-          placeholder="Enter title"
+          type='text'
+          placeholder='Enter title'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          required
         />
+        {errors.title && (
+          <small className='d-block form-text text-danger mt-2'>
+            Title is too short (min is 3)
+          </small>
+        )}
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formAuthor">
+      <Form.Group className='mb-3' controlId='formAuthor'>
         <Form.Label>Author</Form.Label>
         <Form.Control
+          {...register('author', { required: true, minLength: 3 })}
           style={{ width: '50%' }}
-          type="text"
-          placeholder="Enter author"
+          type='text'
+          placeholder='Enter author'
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-          required
-          minLength="3"
         />
+        {errors.author && (
+          <small className='d-block form-text text-danger mt-2'>
+            Author is too short (min is 3)
+          </small>
+        )}
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formTitle">
+      <Form.Group className='mb-3' controlId='formTitle'>
         <Form.Label>Published</Form.Label>
         {/* <Form.Control
           style={{ width: '50%' }}
@@ -66,37 +89,44 @@ const PostForm = ({ action, actionText, ...props }) => {
           selected={publishedDate}
           onChange={(date) => setPublishedDate(date)}
         />
+        {dateError && (
+          <small className='d-block form-text text-danger mt-2'>
+            The field is required
+          </small>
+        )}
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formDescription">
+      <Form.Group className='mb-3' controlId='formDescription'>
         <Form.Label>Short description</Form.Label>
         <Form.Control
+          {...register('shortDescription', { required: true, minLength: 20 })}
           style={{ height: '100px' }}
-          as="textarea"
-          placeholder="Leave a comment here"
+          as='textarea'
+          placeholder='Leave a comment here'
           value={shortDescription}
           onChange={(e) => setShortDescription(e.target.value)}
-          required
         />
+        {errors.shortDescription && (
+          <small className='d-block form-text text-danger mt-2'>
+            Description is too short (min is 20)
+          </small>
+        )}
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formContent">
+      <Form.Group className='mb-3' controlId='formContent'>
         <Form.Label>Main content</Form.Label>
-        {/* <Form.Control
-          style={{ height: '200px' }}
-          as="textarea"
-          placeholder="Leave a comment here"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        /> */}
         <ReactQuill
-          theme="snow"
+          theme='snow'
           value={content}
           onChange={setContent}
-          placeholder="Leave a comment here"
+          placeholder='Leave a comment here'
         />
+        {contentError && (
+          <small className='d-block form-text text-danger mt-2'>
+            The field is required
+          </small>
+        )}
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant='primary' type='submit'>
         {actionText}
       </Button>
     </Form>
