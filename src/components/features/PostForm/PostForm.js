@@ -4,8 +4,15 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useForm } from 'react-hook-form';
 
 const PostForm = ({ action, actionText, ...props }) => {
+  const {
+    register,
+    handleSubmit: validate,
+    formState: { errors },
+  } = useForm();
+
   const [title, setTitle] = useState(props.title || '');
   const [author, setAuthor] = useState(props.author || '');
   const [publishedDate, setPublishedDate] = useState(props.publishedDate || '');
@@ -18,7 +25,6 @@ const PostForm = ({ action, actionText, ...props }) => {
     e.preventDefault();
     action({ title, author, publishedDate, shortDescription, content });
   };
-  console.log('publishedDate', publishedDate);
   return (
     <Form onSubmit={handleSubmit} style={{ width: '70%', margin: '0 auto' }}>
       <h1>{actionText}</h1>
