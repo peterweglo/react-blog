@@ -5,7 +5,6 @@ import { editPost, getPostById } from '../../../redux/postsRedux';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import dateToStr from '../../../utils/dateToStr';
 
 const EditPostForm = () => {
   const { id } = useParams();

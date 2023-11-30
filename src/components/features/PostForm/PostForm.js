@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import dateToStr from '../../../utils/dateToStr';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
