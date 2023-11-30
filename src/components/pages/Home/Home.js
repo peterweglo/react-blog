@@ -1,8 +1,11 @@
 import List from '../../features/List/List';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import dateToStr from '../../../utils/dateToStr';
 
 const Home = () => {
+  const dupa = dateToStr(new Date('02-02-2022'));
+  console.log('dupa', dupa);
   return (
     <div>
       <div className="d-flex justify-content-between pb-4">

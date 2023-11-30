@@ -5,6 +5,7 @@ import { editPost, getPostById } from '../../../redux/postsRedux';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import dateToStr from '../../../utils/dateToStr';
 
 const EditPostForm = () => {
   const { id } = useParams();
@@ -18,11 +19,11 @@ const EditPostForm = () => {
     dispatch(editPost({ ...post, id }));
     navigate('/');
   };
-  if (!postData) return <Navigate to='/' />;
+  if (!postData) return <Navigate to="/" />;
   return (
     <PostForm
       action={handleSubmit}
-      actionText='Edit post'
+      actionText="Edit post"
       title={postData.title}
       author={postData.author}
       publishedDate={postData.publishedDate}

@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import dateToStr from '../../../utils/dateToStr';
 
 const Post = (props) => {
   const postId = props.id;
@@ -12,7 +13,7 @@ const Post = (props) => {
           <strong>Author:</strong> {props.author}
         </Card.Text>
         <Card.Text>
-          <strong>Published:</strong> {props.publishedDate}
+          <strong>Published:</strong> {dateToStr(props.publishedDate)}
         </Card.Text>
         <Card.Text>{props.shortDescription} </Card.Text>
         <Button variant="primary" as={Link} to={`/post/${postId}`}>
