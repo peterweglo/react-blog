@@ -18,16 +18,17 @@ const EditPostForm = () => {
     dispatch(editPost({ ...post, id }));
     navigate('/');
   };
-  if (!postData) return <Navigate to="/" />;
+  if (!postData) return <Navigate to='/' />;
   return (
     <PostForm
       action={handleSubmit}
-      actionText="Edit post"
+      actionText='Edit post'
       title={postData.title}
       author={postData.author}
       publishedDate={postData.publishedDate}
       shortDescription={postData.shortDescription}
       content={postData.content}
+      category={postData.category}
     />
   );
 };

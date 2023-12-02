@@ -6,7 +6,7 @@ import dateToStr from '../../../utils/dateToStr';
 const Post = (props) => {
   const postId = props.id;
   return (
-    <Card className="mb-3">
+    <Card className='mb-3'>
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>
@@ -15,8 +15,11 @@ const Post = (props) => {
         <Card.Text>
           <strong>Published:</strong> {dateToStr(props.publishedDate)}
         </Card.Text>
+        <Card.Text>
+          <strong>Category:</strong> {props.category}
+        </Card.Text>
         <Card.Text>{props.shortDescription} </Card.Text>
-        <Button variant="primary" as={Link} to={`/post/${postId}`}>
+        <Button variant='primary' as={Link} to={`/post/${postId}`}>
           Read more
         </Button>
       </Card.Body>

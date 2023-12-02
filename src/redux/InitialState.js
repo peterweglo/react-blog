@@ -7,6 +7,7 @@ const initialState = {
       content: 'Main content of the article',
       publishedDate: new Date('02-02-2022'),
       author: 'John Doe',
+      category: 'Sport',
     },
     {
       id: '2',
@@ -15,6 +16,7 @@ const initialState = {
       content: 'Main content of the article',
       publishedDate: new Date('12-22-2022'),
       author: 'John Doe',
+      category: 'News',
     },
     {
       id: '3',
@@ -23,7 +25,15 @@ const initialState = {
       content: 'Main content of the article',
       publishedDate: new Date('02-11-2023'),
       author: 'John Doe',
+      category: 'Movies',
     },
+  ],
+
+  categories: [
+    { id: 1, name: 'Sport' },
+    { id: 2, name: 'News' },
+    { id: 3, name: 'Movies' },
+    { id: 4, name: 'Travel' },
   ],
 };
 

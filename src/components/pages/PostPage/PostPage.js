@@ -20,12 +20,12 @@ const PostPage = () => {
   };
 
   const postData = useSelector((state) => getPostById(state, id));
-  if (!postData) return <Navigate to="/" />;
+  if (!postData) return <Navigate to='/' />;
 
   return (
-    <main className="d-flex justify-content-center">
-      <div className="pe-5 me-5">
-        <Card className="mb-4 border border-0">
+    <main className='d-flex justify-content-center'>
+      <div className='pe-5 me-5'>
+        <Card className='mb-4 border border-0'>
           <Card.Body>
             <Card.Title>{postData.title}</Card.Title>
             <Card.Text>
@@ -35,22 +35,25 @@ const PostPage = () => {
               <strong>Published:</strong> {dateToStr(postData.publishedDate)}
             </Card.Text>
             <Card.Text>
+              <strong>Category:</strong> {postData.category}
+            </Card.Text>
+            <Card.Text>
               {/* {postData.content} */}
               <span dangerouslySetInnerHTML={{ __html: postData.content }} />
             </Card.Text>
           </Card.Body>
         </Card>
       </div>
-      <div className="ps-5 ms-5">
+      <div className='ps-5 ms-5'>
         <Button
-          variant="outline-info"
+          variant='outline-info'
           as={Link}
           to={`/post/edit/${postData.id}`}
-          className="m-1"
+          className='m-1'
         >
           Edit
         </Button>
-        <Button variant="outline-danger" className="m-1" onClick={handleShow}>
+        <Button variant='outline-danger' className='m-1' onClick={handleShow}>
           Delete
         </Button>
       </div>
@@ -58,7 +61,7 @@ const PostPage = () => {
         <Modal
           show={show}
           onHide={handleClose}
-          backdrop="static"
+          backdrop='static'
           keyboard={false}
         >
           <Modal.Header closeButton>
@@ -74,10 +77,10 @@ const PostPage = () => {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant='secondary' onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="danger" onClick={handleRemove}>
+            <Button variant='danger' onClick={handleRemove}>
               Remove
             </Button>
           </Modal.Footer>

@@ -5,8 +5,11 @@ import 'react-quill/dist/quill.snow.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { getAllCategories } from '../../../redux/categoriesRedux';
 
 const PostForm = ({ action, actionText, ...props }) => {
+  const categories = useSelector(getAllCategories);
   const {
     register,
     handleSubmit: validate,
@@ -16,12 +19,15 @@ const PostForm = ({ action, actionText, ...props }) => {
   const [title, setTitle] = useState(props.title || '');
   const [author, setAuthor] = useState(props.author || '');
   const [publishedDate, setPublishedDate] = useState(props.publishedDate || '');
+  const [category, setCategory] = useState(props.category || '');
   const [shortDescription, setShortDescription] = useState(
     props.shortDescription || ''
   );
   const [content, setContent] = useState(props.content || '');
+
   const [contentError, setContentError] = useState(false);
   const [dateError, setDateError] = useState(false);
+  const [selectError, setSelectError] = useState(false);
 
   const handleSubmit = () => {
     const contentWithoutHTML = content.replace('<p><br></p>', '');
@@ -32,9 +38,17 @@ const PostForm = ({ action, actionText, ...props }) => {
     }
 
     setDateError(!publishedDate);
+    setSelectError(!category);
 
-    if (!isContentEmpty && publishedDate)
-      action({ title, author, publishedDate, shortDescription, content });
+    if (!isContentEmpty && publishedDate && category)
+      action({
+        title,
+        author,
+        publishedDate,
+        shortDescription,
+        content,
+        category,
+      });
   };
   return (
     <Form
@@ -76,20 +90,30 @@ const PostForm = ({ action, actionText, ...props }) => {
       </Form.Group>
       <Form.Group className='mb-3' controlId='formTitle'>
         <Form.Label>Published</Form.Label>
-        {/* <Form.Control
-          style={{ width: '50%' }}
-          type="date"
-          placeholder="Enter date"
-          value={publishedDate}
-          onChange={(e) => setPublishedDate(e.target.value)}
-          required
-          minLength="8"
-        /> */}
         <DatePicker
           selected={publishedDate}
           onChange={(date) => setPublishedDate(date)}
         />
         {dateError && (
+          <small className='d-block form-text text-danger mt-2'>
+            The field is required
+          </small>
+        )}
+      </Form.Group>
+      <Form.Group className='mb-3' controlId='formSelect'>
+        <Form.Label>Category</Form.Label>
+        <Form.Select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value=''>Salect category...</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.name}>
+              {category.name}
+            </option>
+          ))}
+        </Form.Select>
+        {selectError && (
           <small className='d-block form-text text-danger mt-2'>
             The field is required
           </small>
