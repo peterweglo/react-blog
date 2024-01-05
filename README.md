@@ -1,6 +1,6 @@
 # Link to project:
 
-https://react-blog.peterweglo.repl.co/
+https://a36b63be-7271-42a6-9ff5-1c91bdefe5ad-00-bxu69h2evlug.janeway.replit.dev/
 
 # Getting Started with Create React App
 
